@@ -1,0 +1,63 @@
+﻿@model Interview.UI.Models.RequestViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Talep Detayı</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FileStr)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FileStr)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsEvaluated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => (model.IsEvaluated))
+        </dd>
+    </dl>
+
+    <form asp-action="Detail" asp-controller="Request" method="post" asp-antiforgery="true">
+
+        <label asp-for="AdminMessage" class="control-label"></label>
+        <input asp-for="AdminMessage" type="text" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <hr />
+        <input type="submit" value="Kaydet" class="btn btn-primary" />
+    </form>
+</div>
+<div>
+    <a asp-action="List">Talep Listesi</a>
+</div>

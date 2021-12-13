@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Interview.UI.Models.RequestViewModel>
+
+@{
+    ViewData["Title"] = "ListMyRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Geçmiş Talepler</h1>
+
+<p>
+    <a asp-action="Add">Yeni Talep Oluştur</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.IsPositive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminMessage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.File)
+            </td>
+            <td>
+                @(item.IsPositive? "Olumlu":"Olumsuz")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminMessage)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
