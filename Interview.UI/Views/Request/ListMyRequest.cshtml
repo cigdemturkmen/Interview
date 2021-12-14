@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
 <h1>Geçmiş Talepler</h1>
 
 <p>
@@ -29,32 +36,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.AdminMessage)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.File)
-            </td>
-            <td>
-                @(item.IsPositive? "Olumlu":"Olumsuz")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdminMessage)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.File)
+                </td>
+                <td>
+                    @(item.IsPositive? "Olumlu":"Olumsuz")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminMessage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Interview.UI.Controllers
@@ -23,13 +24,17 @@ namespace Interview.UI.Controllers
         public IActionResult List()
         {
             var requests = _requestRepository.GetAll().Where(x => x.IsEvaluated == false).Select(x => new RequestViewModel()
-            {
+            { // burda file null
                 Id = x.Id,
                 Name = x.Name,
                 Surname = x.Surname,
                 IsEvaluated = x.IsEvaluated,
-
+                AdminMessage = x.AdminMessage,
+                Message = x.Message,
+                FileStr = Convert.ToBase64String(x.File),
+                UserId = x.UserId,
             }).ToList();
+
             return View(requests);
         }
 
@@ -57,12 +62,11 @@ namespace Interview.UI.Controllers
                 UserId = currentUserId,
                 CreatedById = currentUserId,
                 CreatedDate = DateTime.Now
-
             };
 
             #region File
 
-            if (model.File.Length > 0) 
+            if (model.File.Length > 0)
             {
                 using (var ms = new MemoryStream())
                 {
@@ -95,24 +99,68 @@ namespace Interview.UI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Detail(int id)
         {
-            var requests = _requestRepository.Get(x => x.Id == id);
+            var request = _requestRepository.Get(x => x.Id == id);
 
-            var vm = new RequestViewModel()
+            var vm = new RequestViewModel() // vm'de File null olarak detail sayfasına gidiyor. (FileStr != null, UserId != null geliyor.)
             {
-                Name = requests.Name,
-                Surname = requests.Surname,
-                Message = requests.Message,
-                FileStr = Convert.ToBase64String(requests.File),
-                IsPositive = requests.IsPositive,
+                Id = request.Id,
+                Name = request.Name,
+                Surname = request.Surname,
+                Message = request.Message,
+                FileStr = Convert.ToBase64String(request.File),
+                IsPositive = request.IsPositive,
+                UserId = request.UserId,
+                //File = request.File,
+
+                // byte[] bytes = Encoding.ASCII.GetBytes(vm.FileStr);
+                // entity.File = bytes;
+
             };
 
             return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Detail(RegisterViewModel model)
+        public IActionResult Detail(RequestViewModel model)
         {
-            return null;
+            // byte[] bytes = Encoding.ASCII.GetBytes(model.FileStr);
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+
+            var currentUserId = GetCurrentUserId();
+
+            var entity = new Request()
+            {
+
+                Name = model.Name,
+                Surname = model.Surname,
+                AdminMessage = model.AdminMessage,
+                Message = model.Message,
+                UserId = model.UserId,
+                IsPositive = model.IsPositive,
+            };
+
+            bool result;
+            byte[] file = Encoding.ASCII.GetBytes(model.FileStr);
+            entity.File = file;
+            entity.Id = model.Id;
+            entity.UpdatedById = currentUserId;
+            entity.UpdatedDate = DateTime.Now;
+            entity.IsEvaluated = true;
+
+            result = _requestRepository.Edit(entity);
+
+            if (result)
+            {
+                return RedirectToAction("List");
+            }
+
+            ViewBag.Message = "Bir şeyler ters gitti!";
+            return View(model);
         }
 
         [Authorize(Roles = "User")]
@@ -130,7 +178,16 @@ namespace Interview.UI.Controllers
             }).ToList();
 
             return View(requests);
-           
+        }
+
+        [Authorize(Roles = "User")]
+        public ActionResult Delete(int id)
+        {
+            var result = _requestRepository.Delete(id);
+
+            TempData["Message"] = result ? "" : "Silme yapılamadı";
+
+            return RedirectToAction("ListMyRequest");
         }
 
 

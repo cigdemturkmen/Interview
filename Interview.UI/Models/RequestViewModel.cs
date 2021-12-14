@@ -32,16 +32,19 @@ namespace Interview.UI.Models
         public string FileStr { get; set; }
 
         [DisplayName("Kullanıcı Id")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int? UserId { get; set; }
 
         [DisplayName("Değerlendirme")]
         public bool IsPositive { get; set; }
 
-        [DisplayName("Değerlendirildi")]
+        [DisplayName("Değerlendirildi mi?")]
         public bool IsEvaluated { get; set; }
 
         [DisplayName("Açıklama")]
         public string AdminMessage { get; set; }
+
+        public DateTime? UpdatedDate { get; set; }
+
+
     }
 }

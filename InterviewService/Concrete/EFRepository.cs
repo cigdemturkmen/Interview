@@ -1,6 +1,7 @@
 ﻿using Interview.Data;
 using Interview.Data.Entities.Abstract;
 using InterviewService.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,28 @@ namespace InterviewService.Concrete
             entity.CreatedDate = DateTime.Now;
 
             _context.Set<T>().Add(entity);
+
+            return _context.SaveChanges() > 0;
+        }
+
+        public bool Delete(int id)
+        {
+            var entity = Get(x => x.Id == id && x.IsActive);
+            if (entity == null)
+            {
+                return false;
+            }
+
+            entity.IsActive = false;
+
+            return _context.SaveChanges() > 0;
+        }
+
+        public bool Edit(T entity)
+        {
+            _context.Entry<T>(entity).State = EntityState.Modified;
+
+            _context.Set<T>().Update(entity);
 
             return _context.SaveChanges() > 0;
         }

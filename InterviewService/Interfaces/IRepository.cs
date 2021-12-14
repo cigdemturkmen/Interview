@@ -14,5 +14,9 @@ namespace InterviewService.Interfaces
         T Get(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
         bool Add(T entity);
+
+        bool Edit(T entity);
+
+        bool Delete(int id);
     }
 }

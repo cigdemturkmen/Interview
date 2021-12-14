@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@TempData["File"]
+
 <h1>Talepler</h1>
 
 
@@ -49,7 +51,7 @@
         </td>
             <td>
         
-                @Html.ActionLink("Detail", "Detail", new { id=item.Id }) |
+                @Html.ActionLink("Detail", "Detail", new { id=item.Id })
     
             </td>
         </tr>

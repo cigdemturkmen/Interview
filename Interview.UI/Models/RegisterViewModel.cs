@@ -34,6 +34,6 @@ namespace Interview.UI.Models
         [Compare(nameof(Password), ErrorMessage = "Şifreler uyuşmuyor!")]
         [StringLength(12, MinimumLength = 6, ErrorMessage = "En az 6, en fazla 12 karakter girilebilir.")]
         public string PasswordConfirm { get; set; }
- 
+
     }
 }
