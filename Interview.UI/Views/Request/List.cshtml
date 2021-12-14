@@ -22,9 +22,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Surname)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Message)
-            </th>*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsEvaluated)
             </th>
@@ -43,16 +46,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Message)
-             </td>*@
-        <td>   
-            @(item.IsEvaluated ? "Evet" : "Hayır")
-        </td>
             <td>
-        
-                @Html.ActionLink("Detail", "Detail", new { id=item.Id })
-    
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @(item.IsEvaluated ? "Evet" : "Hayır")
+            </td>
+            <td>
+
+                @Html.ActionLink("Detail", "Detail", new { id = item.Id })
+
             </td>
         </tr>
 }

@@ -19,38 +19,38 @@
     <form class="user" asp-controller="auth" asp-action="register" method="post" asp-antiforgery="true">
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input asp-for="Name" type="text" class="form-control form-control-user" placeholder="First Name">
+                <input asp-for="Name" type="text" class="form-control form-control-user" placeholder="İsim">
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="col-sm-6">
-                <input asp-for="Surname" type="text" class="form-control form-control-user" placeholder="Last Name">
+                <input asp-for="Surname" type="text" class="form-control form-control-user" placeholder="Soyisim">
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <input asp-for="Phone" type="text" class="form-control form-control-user" placeholder="Phone">
+            <input asp-for="Phone" type="text" class="form-control form-control-user" placeholder="Telefon">
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input asp-for="Email" type="email" class="form-control form-control-user" placeholder="Email Address">
+            <input asp-for="Email" type="email" class="form-control form-control-user" placeholder="ornek@mail.com">
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input asp-for="Password" type="password" class="form-control form-control-user" placeholder="Password">
+                <input asp-for="Password" type="password" class="form-control form-control-user" placeholder="Şifre">
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="col-sm-6">
-                <input asp-for="PasswordConfirm" type="password" class="form-control form-control-user" placeholder="Repeat Password">
+                <input asp-for="PasswordConfirm" type="password" class="form-control form-control-user" placeholder="Şifre tekrarı">
                 <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-user btn-block">
-            Register Account
+            Hemen Kaydolun
         </button>
     </form>
     <hr>
     <div class="text-center">
-        <a class="small" href="/auth/login">Already have an account? Login!</a>
+        <a class="small" href="/auth/login">Hesabınız var mı? Giriş yapın!</a>
     </div>
 </div>

@@ -3,8 +3,15 @@
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Message
+    </div>
+}
 <h1>Talep Detayı</h1>
 
 <div>
@@ -45,7 +52,7 @@
     </dl>
 
     <form asp-action="Detail" asp-controller="Request" method="post" asp-antiforgery="true">
-        
+
         <input type="hidden" asp-for="Id" a />
         <input type="hidden" asp-for="FileStr" a />
         <input type="hidden" asp-for="Id" a />

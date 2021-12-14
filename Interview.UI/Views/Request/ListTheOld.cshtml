@@ -1,22 +1,14 @@
 ﻿@model IEnumerable<Interview.UI.Models.RequestViewModel>
 
 @{
-    ViewData["Title"] = "ListMyRequest";
+    ViewData["Title"] = "ListTheOld";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-info">
-        @TempData["Message"]
-    </div>
 }
 
 <h1>Geçmiş Talepler</h1>
 
-<p>
-    <a asp-action="Add">Yeni Talep Oluştur</a>
-</p>
+<a href="#">Listeyi indir</a>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -24,22 +16,27 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Message)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.File)
-            </th>*@
             <th>
-
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IsPositive)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AdminMessage)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedDate)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,24 +47,28 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Message)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.File)
-                </td>*@
                 <td>
-                    @(item.IsPositive? "Olumlu":"Olumsuz")
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @(item.IsPositive ? "Olumlu" : "Olumsuz")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AdminMessage)
                 </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdatedDate)
                 </td>
-                <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) | *@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+
             </tr>
         }
     </tbody>

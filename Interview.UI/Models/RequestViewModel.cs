@@ -34,15 +34,21 @@ namespace Interview.UI.Models
         [DisplayName("Kullanıcı Id")]
         public int? UserId { get; set; }
 
-        [DisplayName("Değerlendirme")]
+        [DisplayName("Olumlu mu?")]
         public bool IsPositive { get; set; }
 
         [DisplayName("Değerlendirildi mi?")]
         public bool IsEvaluated { get; set; }
 
+       
+
         [DisplayName("Açıklama")]
         public string AdminMessage { get; set; }
 
+        [DisplayName("Talep Tarihi")]
+        public DateTime CreatedDate { get; set; }
+
+        [DisplayName("Değerlendirilme Tarihi")]
         public DateTime? UpdatedDate { get; set; }
 
 

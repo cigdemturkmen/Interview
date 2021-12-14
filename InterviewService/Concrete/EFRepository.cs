@@ -38,6 +38,7 @@ namespace InterviewService.Concrete
             }
 
             entity.IsActive = false;
+            entity.UpdatedDate = DateTime.Now; //
 
             return _context.SaveChanges() > 0;
         }
