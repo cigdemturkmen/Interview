@@ -22,8 +22,7 @@ namespace Interview.UI.Controllers
 
         [Authorize(Roles = "Admin")]
         public IActionResult List()
-        {
-
+        { // where cümlesini getall(buraya yaz) - servis katmanında sadece repositoryler mi var?
             var requests = _requestRepository.GetAll().Where(x => x.IsEvaluated == false && x.IsActive).Select(x => new RequestViewModel()
             {
                 Id = x.Id,
@@ -59,7 +58,6 @@ namespace Interview.UI.Controllers
                      
             }).ToList();
 
-            
             return View(requests);
         }
 
@@ -151,11 +149,9 @@ namespace Interview.UI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Detail(RequestViewModel model)
         {
-            
-
             //if (!ModelState.IsValid)
             //{
-            //    return View(model); // file null gelince buraya düşüyor.
+            //    return View(model); // file null gelince buraya düşüyor. Edit yapmıyor.
             //}
 
             var currentUserId = GetCurrentUserId();
@@ -171,6 +167,7 @@ namespace Interview.UI.Controllers
             };
 
             bool result;
+
             byte[] file = Encoding.ASCII.GetBytes(model.FileStr); //
             entity.File = file;
             entity.Id = model.Id;
@@ -231,12 +228,14 @@ namespace Interview.UI.Controllers
 
             var request = _requestRepository.Get(x => x.Id == id && x.UserId == currentUserId);
 
+            var result = false;
+
             if (request != null)
             {
-                var result = _requestRepository.Delete(id);
+                result = _requestRepository.Delete(id);
             } 
 
-            TempData["Message"] = "Silme yapılamadı";
+            // TempData["Message"] = result : "" : "Silme yapılamadı";
 
             return RedirectToAction("ListMyRequest");
         }

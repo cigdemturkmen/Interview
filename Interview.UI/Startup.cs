@@ -35,6 +35,7 @@ namespace Interview.UI
 
             services.AddScoped<IRepository<User>, EFRepository<User>>();
             services.AddScoped<IRepository<Request>, EFRepository<Request>>();
+            
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
